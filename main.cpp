@@ -140,38 +140,39 @@ void startSimulation(std::vector<std::vector<char>>& grid, int& x, int& y){
 	clearInputBuffer();
 	std::cin.get();
 	
+	// First 2 for loops are to iterate through the entire grid
 	for(int row = 0; row < x; row++){
 		for(int col = 0; col < y; col++){
-			if(row == 0){
-				if(col == 0){
+			if(row == 0){ // Takes care of top row edge case
+				if(col == 0){ // Takes care of left top row edge case
 
 				}
-				else if(col + 1 == y){
+				else if(col + 1 == y){ // Takes care of right top row edge case
 
 				}
-				else{
+				else{ // For the rest of the middle cells
 
 				}
 			}
-			else if(row + 1 == x){
-				if(col == 0){
+			else if(row + 1 == x){ // Takes care of the bottom row edge case
+				if(col == 0){ // Takes care of the bottom left edge case
 
 				}
-				else if(col + 1 == y){
+				else if(col + 1 == y){ // Takes care of the bottom right edge case
 
 				}
-				else{
+				else{ // Takes care of the rest of the middle cells
 
 				}	
 			}
-			else{
-				if(col == 0){
+			else{ // Takes care of the rest of the middle cells
+				if(col == 0){ // Takes the edge case for the left middle cells
 
 				}
-				else if(col + 1 == y){
+				else if(col + 1 == y){ // Takes the edge case for the right middle                          edge case
 
 				}
-				else{
+				else{ // Takes care of the rest of the middle cells
 
 				}
 			}
