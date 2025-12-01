@@ -14,13 +14,13 @@ void printGrid(std::vector<std::vector<char>> grid, int& x, int& y);
 void getUserCell(std::vector<std::vector<char>>& grid, int& x, int& y);
 void startSimulation(std::vector<std::vector<char>>& grid, int& x, int& y);
 void clearInputBuffer();
-void checkUpperLeft(std::vector<std::vector<char>>& grid, int& x, int &y);
-void checkUpperRight(std::vector<std::vector<char>>& grid, int& x, int& y);
-void checkLowerLeft(std::vector<std::vector<char>>& grid, int& x, int& y);
-void checkLowerRight(std::vector<std::vector<char>>& grid, int& x, int& y);
-void checkLeft(std::vector<std::vector<char>>& grid, int& x, int& y);
-void checkRight(std::vector<std::vector<char>>& grid, int& x, int& y);
-void checkMiddle(std::vector<std::vector<char>>& grid, int& x, int& y);
+bool checkUpperLeft(std::vector<std::vector<char>>& grid, int& x, int &y);
+bool checkUpperRight(std::vector<std::vector<char>>& grid, int& x, int& y);
+bool checkLowerLeft(std::vector<std::vector<char>>& grid, int& x, int& y);
+bool checkLowerRight(std::vector<std::vector<char>>& grid, int& x, int& y);
+bool checkLeft(std::vector<std::vector<char>>& grid, int& x, int& y);
+bool checkRight(std::vector<std::vector<char>>& grid, int& x, int& y);
+bool checkMiddle(std::vector<std::vector<char>>& grid, int& x, int& y);
 
 int main(){
 
@@ -192,31 +192,31 @@ void clearInputBuffer(){
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
-void checkUpperLeft(std::vector<std::vector<char>>& grid, int& x, int &y){
+bool checkUpperLeft(std::vector<std::vector<char>>& grid, int& x, int &y){
 
 }
 
-void checkUpperRight(std::vector<std::vector<char>>& grid, int& x, int& y){
+bool checkUpperRight(std::vector<std::vector<char>>& grid, int& x, int& y){
 
 }
 
-void checkLowerLeft(std::vector<std::vector<char>>& grid, int& x, int& y){
+bool checkLowerLeft(std::vector<std::vector<char>>& grid, int& x, int& y){
 
 }
 
-void checkLowerRight(std::vector<std::vector<char>>& grid, int& x, int& y){
+bool checkLowerRight(std::vector<std::vector<char>>& grid, int& x, int& y){
 
 }
 
-void checkLeft(std::vector<std::vector<char>>& grid, int& x, int& y){
+bool checkLeft(std::vector<std::vector<char>>& grid, int& x, int& y){
 
 }
 
-void checkRight(std::vector<std::vector<char>>& grid, int& x, int& y){
+bool checkRight(std::vector<std::vector<char>>& grid, int& x, int& y){
 
 }
 
-void checkMiddle(std::vector<std::vector<char>>& grid, int& x, int& y){
+bool checkMiddle(std::vector<std::vector<char>>& grid, int& x, int& y){
 
 }
 
