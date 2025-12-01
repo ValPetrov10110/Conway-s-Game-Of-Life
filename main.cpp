@@ -139,6 +139,8 @@ void startSimulation(std::vector<std::vector<char>> grid, int& x, int& y){
 	std::cout << "\nPress any key to start simulation...";
 	clearInputBuffer();
 	std::cin.get();
+
+
 }
 
 void clearInputBuffer(){
