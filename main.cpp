@@ -14,6 +14,13 @@ void printGrid(std::vector<std::vector<char>> grid, int& x, int& y);
 void getUserCell(std::vector<std::vector<char>>& grid, int& x, int& y);
 void startSimulation(std::vector<std::vector<char>>& grid, int& x, int& y);
 void clearInputBuffer();
+void checkUpperLeft(std::vector<std::vector<char>>& grid, int& x, int &y);
+void checkUpperRight(std::vector<std::vector<char>>& grid, int& x, int& y);
+void checkLowerLeft(std::vector<std::vector<char>>& grid, int& x, int& y);
+void checkLowerRight(std::vector<std::vector<char>>& grid, int& x, int& y);
+void checkLeft(std::vector<std::vector<char>>& grid, int& x, int& y);
+void checkRight(std::vector<std::vector<char>>& grid, int& x, int& y);
+void checkMiddle(std::vector<std::vector<char>>& grid, int& x, int& y);
 
 int main(){
 
@@ -139,13 +146,13 @@ void startSimulation(std::vector<std::vector<char>>& grid, int& x, int& y){
 	std::cout << "\nPress any key to start simulation...";
 	clearInputBuffer();
 	std::cin.get();
-	
+
 	// First 2 for loops are to iterate through the entire grid
 	for(int row = 0; row < x; row++){
 		for(int col = 0; col < y; col++){
 			if(row == 0){ // Takes care of top row edge case
 				if(col == 0){ // Takes care of left top row edge case
-
+					
 				}
 				else if(col + 1 == y){ // Takes care of right top row edge case
 
@@ -184,3 +191,33 @@ void startSimulation(std::vector<std::vector<char>>& grid, int& x, int& y){
 void clearInputBuffer(){
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
+
+void checkUpperLeft(std::vector<std::vector<char>>& grid, int& x, int &y){
+
+}
+
+void checkUpperRight(std::vector<std::vector<char>>& grid, int& x, int& y){
+
+}
+
+void checkLowerLeft(std::vector<std::vector<char>>& grid, int& x, int& y){
+
+}
+
+void checkLowerRight(std::vector<std::vector<char>>& grid, int& x, int& y){
+
+}
+
+void checkLeft(std::vector<std::vector<char>>& grid, int& x, int& y){
+
+}
+
+void checkRight(std::vector<std::vector<char>>& grid, int& x, int& y){
+
+}
+
+void checkMiddle(std::vector<std::vector<char>>& grid, int& x, int& y){
+
+}
+
+
