@@ -12,7 +12,7 @@ int getXValue();
 int getYValue();
 void printGrid(std::vector<std::vector<char>> grid, int& x, int& y);
 void getUserCell(std::vector<std::vector<char>>& grid, int& x, int& y);
-void startSimulation(std::vector<std::vector<char>> grid, int& x, int& y);
+void startSimulation(std::vector<std::vector<char>>& grid, int& x, int& y);
 void clearInputBuffer();
 
 int main(){
@@ -133,13 +133,50 @@ void getUserCell(std::vector<std::vector<char>>& grid, int& x, int& y){
 	}while(toupper(replayValue) != 'N');
 }
 
-void startSimulation(std::vector<std::vector<char>> grid, int& x, int& y){
+void startSimulation(std::vector<std::vector<char>>& grid, int& x, int& y){
 	system("clear");
 	printGrid(grid, x, y);
 	std::cout << "\nPress any key to start simulation...";
 	clearInputBuffer();
 	std::cin.get();
+	
+	for(int row = 0; row < x; row++){
+		for(int col = 0; col < y; col++){
+			if(row == 0){
+				if(col == 0){
 
+				}
+				else if(col + 1 == y){
+
+				}
+				else{
+
+				}
+			}
+			else if(row + 1 == x){
+				if(col == 0){
+
+				}
+				else if(col + 1 == y){
+
+				}
+				else{
+
+				}	
+			}
+			else{
+				if(col == 0){
+
+				}
+				else if(col + 1 == y){
+
+				}
+				else{
+
+				}
+			}
+		}
+	}
 
 }
 
