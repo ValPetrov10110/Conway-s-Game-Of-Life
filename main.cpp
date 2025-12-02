@@ -206,7 +206,6 @@ void checkUpperLeft(std::vector<std::vector<char>>& grid, int& x, int &y){
 	if(grid[y + 1][x + 1] == 'o'){
 		aliveCells++;
 	}
-	std::cout << aliveCells << '\n';
 	if(grid[y][x] == 'o'){
 		if(aliveCells < 2){
 			grid[y][x] = '.'; // Dies via underpopulation
