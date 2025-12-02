@@ -163,7 +163,7 @@ void startSimulation(std::vector<std::vector<char>>& grid, int& x, int& y){
 			}
 			else if(row + 1 == x){ // Takes care of the bottom row edge case
 				if(col == 0){ // Takes care of the bottom left edge case
-
+					checkLowerLeft(grid, row, col);
 				}
 				else if(col + 1 == y){ // Takes care of the bottom right edge case
 
@@ -250,8 +250,32 @@ void checkUpperRight(std::vector<std::vector<char>>& grid, int& x, int& y){
 
 }
 
+// This function is working properly; checks lower left cell
 void checkLowerLeft(std::vector<std::vector<char>>& grid, int& x, int& y){
+	int aliveCells{};
+	if(grid[x - 1][y] == 'o'){
+		aliveCells++;
+	}
+	if(grid[x][y + 1] == 'o'){
+		aliveCells++;
+	}
+	if(grid[x - 1][y + 1] == 'o'){
+		aliveCells++;
+	}
 
+	if(grid[x][y] == 'o'){
+		if(aliveCells < 2){
+			grid[x][y] = '.'; // Dies via underpopulation
+		}
+		else if(aliveCells == 2 || aliveCells == 3){
+			grid[x][y] = 'o'; // Lives on to the next generation
+		}
+	}
+	else{
+		if(aliveCells == 3){
+			grid[x][y] = 'o'; // Repopulates
+		}
+	}
 }
 
 void checkLowerRight(std::vector<std::vector<char>>& grid, int& x, int& y){
