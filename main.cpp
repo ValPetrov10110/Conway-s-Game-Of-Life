@@ -193,29 +193,30 @@ void clearInputBuffer(){
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
+// This function is working properly; checks upper left cell
 void checkUpperLeft(std::vector<std::vector<char>>& grid, int& x, int &y){
 	int aliveCells{};
 
-	if(grid[y][x + 1] == 'o'){
+	if(grid[x][y + 1] == 'o'){
 		aliveCells++;
 	}
-	if(grid[y + 1][x] == 'o'){
+	if(grid[x + 1][y + 1] == 'o'){
 		aliveCells++;
 	}
-	if(grid[y + 1][x + 1] == 'o'){
+	if(grid[x + 1][y] == 'o'){
 		aliveCells++;
 	}
-	if(grid[y][x] == 'o'){
+	if(grid[x][y] == 'o'){
 		if(aliveCells < 2){
-			grid[y][x] = '.'; // Dies via underpopulation
+			grid[x][y] = '.'; // Dies via underpopulation
 		}
 		else if(aliveCells == 2 || aliveCells == 3){
-			grid[y][x] = 'o'; // Lives on to the next generation
+			grid[x][y] = 'o'; // Lives on to the next generation
 		}
 	}
 	else{
 		if(aliveCells == 3){
-			grid[y][x] = 'o'; // Repopulates
+			grid[x][y] = 'o'; // Repopulates
 		}
 	}
 }
