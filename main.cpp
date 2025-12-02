@@ -177,7 +177,7 @@ void startSimulation(std::vector<std::vector<char>>& grid, int& x, int& y){
 			}
 			else{ // Takes care of the rest of the middle cells
 				if(col == 0){ // Takes the edge case for the left middle cells
-
+					checkLeft(grid, row, col);
 				}
 				else if(col + 1 == y){ // Takes the edge case for the right middle edge case
 
@@ -383,7 +383,39 @@ void checkBottom(std::vector<std::vector<char>>& grid, int& x, int& y){
 }
 
 void checkLeft(std::vector<std::vector<char>>& grid, int& x, int& y){
-
+	int aliveCells{};
+	if(grid[x - 1][y] == 'o'){
+		aliveCells++;
+	}
+	if(grid[x - 1][y + 1] == 'o'){
+		aliveCells++;
+	}
+	if(grid[x][y + 1] == 'o'){
+		aliveCells++;
+	}
+	if(grid[x + 1][y + 1] == 'o'){
+		aliveCells++;
+	}
+	if(grid[x + 1][y] == 'o'){
+		aliveCells++;
+	}
+	
+	if(grid[x][y] == 'o'){
+		if(aliveCells < 2){
+			grid[x][y] = '.'; // Dies via underpopulation
+		}
+		else if(aliveCells == 2 || aliveCells == 3){
+			grid[x][y] = 'o'; // Lives on to the next generation
+		}
+		else{
+			grid[x][y] = '.'; // Dies via overpopulation
+		}
+	}
+	else{
+		if(aliveCells == 3){
+			grid[x][y] = 'o'; //Repopulates
+		}
+	}
 }
 
 void checkRight(std::vector<std::vector<char>>& grid, int& x, int& y){
