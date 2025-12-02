@@ -14,13 +14,13 @@ void printGrid(std::vector<std::vector<char>> grid, int& x, int& y);
 void getUserCell(std::vector<std::vector<char>>& grid, int& x, int& y);
 void startSimulation(std::vector<std::vector<char>>& grid, int& x, int& y);
 void clearInputBuffer();
-bool checkUpperLeft(std::vector<std::vector<char>>& grid, int& x, int &y);
-bool checkUpperRight(std::vector<std::vector<char>>& grid, int& x, int& y);
-bool checkLowerLeft(std::vector<std::vector<char>>& grid, int& x, int& y);
-bool checkLowerRight(std::vector<std::vector<char>>& grid, int& x, int& y);
-bool checkLeft(std::vector<std::vector<char>>& grid, int& x, int& y);
-bool checkRight(std::vector<std::vector<char>>& grid, int& x, int& y);
-bool checkMiddle(std::vector<std::vector<char>>& grid, int& x, int& y);
+void checkUpperLeft(std::vector<std::vector<char>>& grid, int& x, int &y);
+void checkUpperRight(std::vector<std::vector<char>>& grid, int& x, int& y);
+void checkLowerLeft(std::vector<std::vector<char>>& grid, int& x, int& y);
+void checkLowerRight(std::vector<std::vector<char>>& grid, int& x, int& y);
+void checkLeft(std::vector<std::vector<char>>& grid, int& x, int& y);
+void checkRight(std::vector<std::vector<char>>& grid, int& x, int& y);
+void checkMiddle(std::vector<std::vector<char>>& grid, int& x, int& y);
 
 int main(){
 
@@ -152,10 +152,10 @@ void startSimulation(std::vector<std::vector<char>>& grid, int& x, int& y){
 		for(int col = 0; col < y; col++){
 			if(row == 0){ // Takes care of top row edge case
 				if(col == 0){ // Takes care of left top row edge case
-					
+					checkUpperLeft(grid, row, col);	
 				}
 				else if(col + 1 == y){ // Takes care of right top row edge case
-
+					checkUpperRight(grid, row, col);
 				}
 				else{ // For the rest of the middle cells
 
@@ -176,7 +176,7 @@ void startSimulation(std::vector<std::vector<char>>& grid, int& x, int& y){
 				if(col == 0){ // Takes the edge case for the left middle cells
 
 				}
-				else if(col + 1 == y){ // Takes the edge case for the right middle                          edge case
+				else if(col + 1 == y){ // Takes the edge case for the right middle edge case
 
 				}
 				else{ // Takes care of the rest of the middle cells
@@ -185,6 +185,8 @@ void startSimulation(std::vector<std::vector<char>>& grid, int& x, int& y){
 			}
 		}
 	}
+	
+	printGrid(grid, x, y);
 
 }
 
@@ -192,31 +194,56 @@ void clearInputBuffer(){
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
-bool checkUpperLeft(std::vector<std::vector<char>>& grid, int& x, int &y){
+void checkUpperLeft(std::vector<std::vector<char>>& grid, int& x, int &y){
+	int aliveCells{};
+
+	if(grid[y][x + 1] == 'o'){
+		aliveCells++;
+	}
+	if(grid[y + 1][x] == 'o'){
+		aliveCells++;
+	}
+	if(grid[y + 1][x + 1] == 'o'){
+		aliveCells++;
+	}
+	std::cout << aliveCells << '\n';
+	if(grid[y][x] == 'o'){
+		if(aliveCells < 2){
+			grid[y][x] = '.'; // Dies via underpopulation
+		}
+		else if(aliveCells == 2 || aliveCells == 3){
+			grid[y][x] = 'o'; // Lives on to the next generation
+		}
+	}
+	else{
+		if(aliveCells == 3){
+			grid[y][x] = 'o'; // Repopulates
+		}
+	}
+}
+
+void checkUpperRight(std::vector<std::vector<char>>& grid, int& x, int& y){
+	int aliveCells{};
 
 }
 
-bool checkUpperRight(std::vector<std::vector<char>>& grid, int& x, int& y){
+void checkLowerLeft(std::vector<std::vector<char>>& grid, int& x, int& y){
 
 }
 
-bool checkLowerLeft(std::vector<std::vector<char>>& grid, int& x, int& y){
+void checkLowerRight(std::vector<std::vector<char>>& grid, int& x, int& y){
 
 }
 
-bool checkLowerRight(std::vector<std::vector<char>>& grid, int& x, int& y){
+void checkLeft(std::vector<std::vector<char>>& grid, int& x, int& y){
 
 }
 
-bool checkLeft(std::vector<std::vector<char>>& grid, int& x, int& y){
+void checkRight(std::vector<std::vector<char>>& grid, int& x, int& y){
 
 }
 
-bool checkRight(std::vector<std::vector<char>>& grid, int& x, int& y){
-
-}
-
-bool checkMiddle(std::vector<std::vector<char>>& grid, int& x, int& y){
+void checkMiddle(std::vector<std::vector<char>>& grid, int& x, int& y){
 
 }
 
