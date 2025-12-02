@@ -185,7 +185,8 @@ void startSimulation(std::vector<std::vector<char>>& grid, int& x, int& y){
 			}
 		}
 	}
-	
+	clearInputBuffer();
+	std::cin.get();
 	printGrid(grid, x, y);
 
 }
@@ -221,9 +222,38 @@ void checkUpperLeft(std::vector<std::vector<char>>& grid, int& x, int &y){
 	}
 }
 
+// THis function is NOT working, I have to see what's wrong
 void checkUpperRight(std::vector<std::vector<char>>& grid, int& x, int& y){
 	int aliveCells{};
+	
+	std::cout << "x: " << x << "\ny: " << y << '\n';
+	if(grid[y][x + 1] == 'o'){
+		aliveCells++;
+		std::cout << "Counted y, x + 1\n";
+	}
+	if(grid[y - 1][x] == 'o'){
+		aliveCells++;
+		std::cout << "Counted y - 1, x\n";
+	}
+	if(grid[y - 1][x + 1] == 'o'){
+		aliveCells++;
+	std::cout << "Counted y - 1, x + 1\n";
+	}
+	std::cout << "Total Live Cell Count: " << aliveCells;
 
+	if(grid[y][x] == 'o'){
+		if(aliveCells < 2){
+			grid[y][x] = '.'; // Dies via underpopulation
+		}
+		else if(aliveCells == 2 || aliveCells == 3){
+			grid[y][x] = 'o'; // Lives on to the next generation
+		}
+	}
+	else{
+		if(aliveCells == 3){
+			grid[y][x] = 'o'; // Repopulates
+		}
+	}
 }
 
 void checkLowerLeft(std::vector<std::vector<char>>& grid, int& x, int& y){
