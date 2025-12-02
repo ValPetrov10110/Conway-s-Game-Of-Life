@@ -180,10 +180,10 @@ void startSimulation(std::vector<std::vector<char>>& grid, int& x, int& y){
 					checkLeft(grid, row, col);
 				}
 				else if(col + 1 == y){ // Takes the edge case for the right middle edge case
-
+					checkRight(grid, row, col);
 				}
 				else{ // Takes care of the rest of the middle cells
-
+					checkMiddle(grid, row, col);
 				}
 			}
 		}
@@ -309,7 +309,7 @@ void checkLowerRight(std::vector<std::vector<char>>& grid, int& x, int& y){
 	}
 }
 
-// This functionis working properly; checks the top row w/o corners
+// This function is working properly; checks the top row w/o corners
 void checkTop(std::vector<std::vector<char>>& grid, int& x, int& y){
 	int aliveCells{};
 	if(grid[x][y - 1] == 'o'){
@@ -346,6 +346,7 @@ void checkTop(std::vector<std::vector<char>>& grid, int& x, int& y){
 	}
 }
 
+// This function is working properly; checks the bottom row w/o corners
 void checkBottom(std::vector<std::vector<char>>& grid, int& x, int& y){
 	int aliveCells{};
 	if(grid[x][y - 1] == 'o'){
@@ -382,6 +383,7 @@ void checkBottom(std::vector<std::vector<char>>& grid, int& x, int& y){
 	}
 }
 
+// This function is working properly; checks the left column w/o corners
 void checkLeft(std::vector<std::vector<char>>& grid, int& x, int& y){
 	int aliveCells{};
 	if(grid[x - 1][y] == 'o'){
@@ -418,13 +420,87 @@ void checkLeft(std::vector<std::vector<char>>& grid, int& x, int& y){
 	}
 }
 
+// This function is working properly; checks the right column w/o corners 
 void checkRight(std::vector<std::vector<char>>& grid, int& x, int& y){
+	int aliveCells{};
+	if(grid[x - 1][y] == 'o'){
+		aliveCells++;
+	}
+	if(grid[x - 1][y - 1] == 'o'){
+		aliveCells++;
+	}
+	if(grid[x][y - 1] == 'o'){
+		aliveCells++;
+	}
+	if(grid[x + 1][y - 1] == 'o'){
+		aliveCells++;
+	}
+	if(grid[x + 1][y] == 0){
+		aliveCells++;
+	}
 
+	if(grid[x][y] == 'o'){
+		if(aliveCells < 2){
+			grid[x][y] = '.'; // Dies via underpopulation
+		}
+		else if(aliveCells == 2 || aliveCells == 3){
+			grid[x][y] = 'o'; // Lives on to the next generation
+		}
+		else{
+			grid[x][y] = '.'; // Dies via overpopulation
+		}
+	}
+	else{
+		if(aliveCells == 3){
+			grid[x][y] = 'o'; // Repopulates 
+		}
+	}
 }
 
-
+// Pretty sure this is compelete (Not 100% tested)
 void checkMiddle(std::vector<std::vector<char>>& grid, int& x, int& y){
+	int aliveCells{};
+	if(grid[x - 1][y - 1] == 'o'){
+		aliveCells++;
+	}
+	if(grid[x - 1][y] == 'o'){
+		aliveCells++;
+	}
+	if(grid[x - 1][y + 1] == 'o'){
+		aliveCells++;
+	}
+	if(grid[x][y - 1] == 'o'){
+		aliveCells++;
+	}
+	if(grid[x][y + 1] == 'o'){
+		aliveCells++;
+	}
+	if(grid[x + 1][y - 1] == 'o'){
+		aliveCells++;
+	}
+	if(grid[x + 1][y] == 'o'){
+		aliveCells++;
+	}
+	if(grid[x + 1][y + 1] == 'o'){
+		aliveCells++;
+	}
 
+	if(grid[x][y] == 'o'){
+		if(aliveCells < 2){
+			grid[x][y] = '.'; // Dies via underpopulation
+		}
+		else if(aliveCells == 2 || aliveCells == 3){
+			grid[x][y] = 'o'; // Lives on to the next generation
+		}
+		else{
+			grid[x][y] = '.'; // Dies via overpopulation
+		}
+	}
+	else{
+		if(aliveCells == 3){
+			grid[x][y] = 'o'; //Repopulates;
+		}
+	}
 }
 
 
