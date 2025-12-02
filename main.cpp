@@ -21,6 +21,9 @@ void checkLowerRight(std::vector<std::vector<char>>& grid, int& x, int& y);
 void checkLeft(std::vector<std::vector<char>>& grid, int& x, int& y);
 void checkRight(std::vector<std::vector<char>>& grid, int& x, int& y);
 void checkMiddle(std::vector<std::vector<char>>& grid, int& x, int& y);
+void checkTop(std::vector<std::vector<char>>& grid, int& x, int& y);
+void checkBottom(std::vector<std::vector<char>>& grid, int& x, int& y);
+
 
 int main(){
 
@@ -158,7 +161,7 @@ void startSimulation(std::vector<std::vector<char>>& grid, int& x, int& y){
 					checkUpperRight(grid, row, col);
 				}
 				else{ // For the rest of the middle cells
-
+					checkTop(grid, row, col);
 				}
 			}
 			else if(row + 1 == x){ // Takes care of the bottom row edge case
@@ -278,6 +281,7 @@ void checkLowerLeft(std::vector<std::vector<char>>& grid, int& x, int& y){
 	}
 }
 
+// This function is working properly; checks lower right cell
 void checkLowerRight(std::vector<std::vector<char>>& grid, int& x, int& y){
 	int aliveCells{};
 	if(grid[x][y - 1] == 'o'){
@@ -305,6 +309,46 @@ void checkLowerRight(std::vector<std::vector<char>>& grid, int& x, int& y){
 	}
 }
 
+void checkTop(std::vector<std::vector<char>>& grid, int& x, int& y){
+	int aliveCells{};
+	if(grid[x][y - 1] == 'o'){
+		aliveCells++;
+	}
+	if(grid[x][y + 1] == 'o'){
+		aliveCells++;
+	}
+	if(grid[x + 1][y] == 'o'){
+		aliveCells++;
+	}
+	if(grid[x + 1][y - 1] == 'o'){
+		aliveCells++;
+	}
+	if(grid[x + 1][y + 1] == 'o'){
+		aliveCells++;
+	}
+
+	if(grid[x][y] == 'o'){
+		if(aliveCells < 2){
+			grid[x][y] = '.'; // Dies via underpopulation
+		}
+		else if(aliveCells == 2 || aliveCells == 3){
+			grid[x][y] = 'o'; // Lives on to the next generation
+		}
+		else{
+			grid[x][y] = '.'; // Dies via overpopulation
+		}
+	}
+	else{
+		if(aliveCells == 3){
+			grid[x][y] = 'o'; // Repopulates
+		}
+	}
+}
+
+void checkBottom(std::vector<std::vector<char>>& grid, int& x, int& y){
+
+}
+
 void checkLeft(std::vector<std::vector<char>>& grid, int& x, int& y){
 
 }
@@ -312,6 +356,7 @@ void checkLeft(std::vector<std::vector<char>>& grid, int& x, int& y){
 void checkRight(std::vector<std::vector<char>>& grid, int& x, int& y){
 
 }
+
 
 void checkMiddle(std::vector<std::vector<char>>& grid, int& x, int& y){
 
