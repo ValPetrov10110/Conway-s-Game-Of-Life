@@ -155,7 +155,7 @@ void startSimulation(std::vector<std::vector<char>>& grid, int& x, int& y){
 	std::cin.get();
 
 	while(true){
-		std::cout << "Generation: " << generation++ << "\n";
+		// std::cout << "Generation: " << generation++ << "\n"; [Too buggy; I'll see what I can do]
 
 		// When I do loop for multiple generations I do want to include this line underneath as well
 		std::vector<std::vector<char>> preGenGrid = grid;
@@ -201,7 +201,7 @@ void startSimulation(std::vector<std::vector<char>>& grid, int& x, int& y){
 
 		printGrid(grid, x, y);
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(500)); // Adjust this to set the speed of the simulation
+		std::this_thread::sleep_for(std::chrono::milliseconds(150)); // Adjust this to set the speed of the simulation
 	}
 }
 
