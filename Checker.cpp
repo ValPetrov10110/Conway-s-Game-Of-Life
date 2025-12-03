@@ -2,7 +2,7 @@
 
 void checkUpperLeft(char2Dvector preGenGrid, char2Dvector& grid, int& x, int& y){
 
-}
+} 
 
 void checkUpperRight(char2Dvector preGenGrid, char2Dvector& grid, int& x, int& y){
 
