@@ -2,6 +2,8 @@
 #include <fstream>
 #include <vector>
 #include <limits>
+#include <thread>
+#include <chrono>
 
 // These are my function declarations
 int startMenu();
@@ -14,15 +16,15 @@ void printGrid(std::vector<std::vector<char>> grid, int& x, int& y);
 void getUserCell(std::vector<std::vector<char>>& grid, int& x, int& y);
 void startSimulation(std::vector<std::vector<char>>& grid, int& x, int& y);
 void clearInputBuffer();
-void checkUpperLeft(std::vector<std::vector<char>>& grid, int& x, int &y);
-void checkUpperRight(std::vector<std::vector<char>>& grid, int& x, int& y);
-void checkLowerLeft(std::vector<std::vector<char>>& grid, int& x, int& y);
-void checkLowerRight(std::vector<std::vector<char>>& grid, int& x, int& y);
-void checkLeft(std::vector<std::vector<char>>& grid, int& x, int& y);
-void checkRight(std::vector<std::vector<char>>& grid, int& x, int& y);
-void checkMiddle(std::vector<std::vector<char>>& grid, int& x, int& y);
-void checkTop(std::vector<std::vector<char>>& grid, int& x, int& y);
-void checkBottom(std::vector<std::vector<char>>& grid, int& x, int& y);
+void checkUpperLeft(std::vector<std::vector<char>> preGenGrid, std::vector<std::vector<char>>& grid, int& x, int &y);
+void checkUpperRight(std::vector<std::vector<char>> preGenGrid, std::vector<std::vector<char>>& grid, int& x, int& y);
+void checkLowerLeft(std::vector<std::vector<char>> preGenGrid, std::vector<std::vector<char>>& grid, int& x, int& y);
+void checkLowerRight(std::vector<std::vector<char>> preGenGrid, std::vector<std::vector<char>>& grid, int& x, int& y);
+void checkLeft(std::vector<std::vector<char>> preGenGrid, std::vector<std::vector<char>>& grid, int& x, int& y);
+void checkRight(std::vector<std::vector<char>> preGenGrid, std::vector<std::vector<char>>& grid, int& x, int& y);
+void checkMiddle(std::vector<std::vector<char>> preGenGrid, std::vector<std::vector<char>>& grid, int& x, int& y);
+void checkTop(std::vector<std::vector<char>> preGenGrid, std::vector<std::vector<char>>& grid, int& x, int& y);
+void checkBottom(std::vector<std::vector<char>> preGenGrid, std::vector<std::vector<char>>& grid, int& x, int& y);
 
 
 int main(){
@@ -146,50 +148,61 @@ void getUserCell(std::vector<std::vector<char>>& grid, int& x, int& y){
 void startSimulation(std::vector<std::vector<char>>& grid, int& x, int& y){
 	system("clear");
 	printGrid(grid, x, y);
+	int generation{};
+	std::cout << "WARNING: In order to exit the simulation you must hold Ctrl + C\n";
 	std::cout << "\nPress any key to start simulation...";
 	clearInputBuffer();
 	std::cin.get();
 
-	// First 2 for loops are to iterate through the entire grid
-	for(int row = 0; row < x; row++){
-		for(int col = 0; col < y; col++){
-			if(row == 0){ // Takes care of top row edge case
-				if(col == 0){ // Takes care of left top row edge case
-					checkUpperLeft(grid, row, col);	
+	while(true){
+		std::cout << "Generation: " << generation++ << "\n";
+
+		// When I do loop for multiple generations I do want to include this line underneath as well
+		std::vector<std::vector<char>> preGenGrid = grid;
+
+		// First 2 for loops are to iterate through the entire grid
+		for(int row = 0; row < x; row++){
+			for(int col = 0; col < y; col++){
+				if(row == 0){ // Takes care of top row edge case
+					if(col == 0){ // Takes care of left top row edge case
+						checkUpperLeft(preGenGrid, grid, row, col);	
+					}
+					else if(col + 1 == y){ // Takes care of right top row edge case
+						checkUpperRight(preGenGrid, grid, row, col);
+					}
+					else{ // For the rest of the middle cells
+						checkTop(preGenGrid, grid, row, col);
+					}
 				}
-				else if(col + 1 == y){ // Takes care of right top row edge case
-					checkUpperRight(grid, row, col);
-				}
-				else{ // For the rest of the middle cells
-					checkTop(grid, row, col);
-				}
-			}
-			else if(row + 1 == x){ // Takes care of the bottom row edge case
-				if(col == 0){ // Takes care of the bottom left edge case
-					checkLowerLeft(grid, row, col);
-				}
-				else if(col + 1 == y){ // Takes care of the bottom right edge case
-					checkLowerRight(grid, row, col);
+				else if(row + 1 == x){ // Takes care of the bottom row edge case
+					if(col == 0){ // Takes care of the bottom left edge case
+						checkLowerLeft(preGenGrid, grid, row, col);
+					}
+					else if(col + 1 == y){ // Takes care of the bottom right edge case
+						checkLowerRight(preGenGrid, grid, row, col);
+					}
+					else{ // Takes care of the rest of the middle cells
+						checkBottom(preGenGrid, grid, row, col);
+					}	
 				}
 				else{ // Takes care of the rest of the middle cells
-					checkBottom(grid, row, col);
-				}	
-			}
-			else{ // Takes care of the rest of the middle cells
-				if(col == 0){ // Takes the edge case for the left middle cells
-					checkLeft(grid, row, col);
-				}
-				else if(col + 1 == y){ // Takes the edge case for the right middle edge case
-					checkRight(grid, row, col);
-				}
-				else{ // Takes care of the rest of the middle cells
-					checkMiddle(grid, row, col);
+					if(col == 0){ // Takes the edge case for the left middle cells
+						checkLeft(preGenGrid, grid, row, col);
+					}
+					else if(col + 1 == y){ // Takes the edge case for the right middle edge case
+						checkRight(preGenGrid, grid, row, col);
+					}
+					else{ // Takes care of the rest of the middle cells
+						checkMiddle(preGenGrid, grid, row, col);
+					}
 				}
 			}
 		}
-	}
-	printGrid(grid, x, y);
 
+		printGrid(grid, x, y);
+
+		std::this_thread::sleep_for(std::chrono::milliseconds(500)); // Adjust this to set the speed of the simulation
+	}
 }
 
 void clearInputBuffer(){
@@ -197,19 +210,19 @@ void clearInputBuffer(){
 }
 
 // This function is working properly; checks upper left cell
-void checkUpperLeft(std::vector<std::vector<char>>& grid, int& x, int &y){
+void checkUpperLeft(std::vector<std::vector<char>> preGenGrid, std::vector<std::vector<char>>& grid, int& x, int &y){
 	int aliveCells{};
 
-	if(grid[x][y + 1] == 'o'){
+	if(preGenGrid[x][y + 1] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x + 1][y + 1] == 'o'){
+	if(preGenGrid[x + 1][y + 1] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x + 1][y] == 'o'){
+	if(preGenGrid[x + 1][y] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x][y] == 'o'){
+	if(preGenGrid[x][y] == 'o'){
 		if(aliveCells < 2){
 			grid[x][y] = '.'; // Dies via underpopulation
 		}
@@ -225,19 +238,19 @@ void checkUpperLeft(std::vector<std::vector<char>>& grid, int& x, int &y){
 }
 
 // This function is working properly; checks upper right cell
-void checkUpperRight(std::vector<std::vector<char>>& grid, int& x, int& y){
+void checkUpperRight(std::vector<std::vector<char>> preGenGrid, std::vector<std::vector<char>>& grid, int& x, int& y){
 	int aliveCells{};
-	if(grid[x][y - 1] == 'o'){
+	if(preGenGrid[x][y - 1] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x + 1][y - 1] == 'o'){
+	if(preGenGrid[x + 1][y - 1] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x + 1][y] == 'o'){
+	if(preGenGrid[x + 1][y] == 'o'){
 		aliveCells++;
 	}
 
-	if(grid[x][y] == 'o'){
+	if(preGenGrid[x][y] == 'o'){
 		if(aliveCells < 2){
 			grid[x][y] = '.'; // Dies via underpopulation
 		}
@@ -254,19 +267,19 @@ void checkUpperRight(std::vector<std::vector<char>>& grid, int& x, int& y){
 }
 
 // This function is working properly; checks lower left cell
-void checkLowerLeft(std::vector<std::vector<char>>& grid, int& x, int& y){
+void checkLowerLeft(std::vector<std::vector<char>> preGenGrid, std::vector<std::vector<char>>& grid, int& x, int& y){
 	int aliveCells{};
-	if(grid[x - 1][y] == 'o'){
+	if(preGenGrid[x - 1][y] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x][y + 1] == 'o'){
+	if(preGenGrid[x][y + 1] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x - 1][y + 1] == 'o'){
+	if(preGenGrid[x - 1][y + 1] == 'o'){
 		aliveCells++;
 	}
 
-	if(grid[x][y] == 'o'){
+	if(preGenGrid[x][y] == 'o'){
 		if(aliveCells < 2){
 			grid[x][y] = '.'; // Dies via underpopulation
 		}
@@ -282,19 +295,19 @@ void checkLowerLeft(std::vector<std::vector<char>>& grid, int& x, int& y){
 }
 
 // This function is working properly; checks lower right cell
-void checkLowerRight(std::vector<std::vector<char>>& grid, int& x, int& y){
+void checkLowerRight(std::vector<std::vector<char>> preGenGrid, std::vector<std::vector<char>>& grid, int& x, int& y){
 	int aliveCells{};
-	if(grid[x][y - 1] == 'o'){
+	if(preGenGrid[x][y - 1] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x - 1][y - 1] == 'o'){
+	if(preGenGrid[x - 1][y - 1] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x - 1][y] == 'o'){
+	if(preGenGrid[x - 1][y] == 'o'){
 		aliveCells++;
 	}
 
-	if(grid[x][y] == 'o'){
+	if(preGenGrid[x][y] == 'o'){
 		if(aliveCells < 2){
 			grid[x][y] = '.'; // Dies via underpopulation
 		}
@@ -310,25 +323,25 @@ void checkLowerRight(std::vector<std::vector<char>>& grid, int& x, int& y){
 }
 
 // This function is working properly; checks the top row w/o corners
-void checkTop(std::vector<std::vector<char>>& grid, int& x, int& y){
+void checkTop(std::vector<std::vector<char>> preGenGrid, std::vector<std::vector<char>>& grid, int& x, int& y){
 	int aliveCells{};
-	if(grid[x][y - 1] == 'o'){
+	if(preGenGrid[x][y - 1] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x][y + 1] == 'o'){
+	if(preGenGrid[x][y + 1] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x + 1][y] == 'o'){
+	if(preGenGrid[x + 1][y] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x + 1][y - 1] == 'o'){
+	if(preGenGrid[x + 1][y - 1] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x + 1][y + 1] == 'o'){
+	if(preGenGrid[x + 1][y + 1] == 'o'){
 		aliveCells++;
 	}
 
-	if(grid[x][y] == 'o'){
+	if(preGenGrid[x][y] == 'o'){
 		if(aliveCells < 2){
 			grid[x][y] = '.'; // Dies via underpopulation
 		}
@@ -347,25 +360,25 @@ void checkTop(std::vector<std::vector<char>>& grid, int& x, int& y){
 }
 
 // This function is working properly; checks the bottom row w/o corners
-void checkBottom(std::vector<std::vector<char>>& grid, int& x, int& y){
+void checkBottom(std::vector<std::vector<char>> preGenGrid, std::vector<std::vector<char>>& grid, int& x, int& y){
 	int aliveCells{};
-	if(grid[x][y - 1] == 'o'){
+	if(preGenGrid[x][y - 1] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x - 1][y - 1] == 'o'){
+	if(preGenGrid[x - 1][y - 1] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x - 1][y] == 'o'){
+	if(preGenGrid[x - 1][y] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x - 1][y + 1] == 'o'){
+	if(preGenGrid[x - 1][y + 1] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x][y + 1] == 'o'){
+	if(preGenGrid[x][y + 1] == 'o'){
 		aliveCells++;
 	}
 
-	if(grid[x][y] == 'o'){
+	if(preGenGrid[x][y] == 'o'){
 		if(aliveCells < 2){
 			grid[x][y] = '.'; // Dies via underpopulation
 		}
@@ -384,25 +397,25 @@ void checkBottom(std::vector<std::vector<char>>& grid, int& x, int& y){
 }
 
 // This function is working properly; checks the left column w/o corners
-void checkLeft(std::vector<std::vector<char>>& grid, int& x, int& y){
+void checkLeft(std::vector<std::vector<char>> preGenGrid, std::vector<std::vector<char>>& grid, int& x, int& y){
 	int aliveCells{};
-	if(grid[x - 1][y] == 'o'){
+	if(preGenGrid[x - 1][y] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x - 1][y + 1] == 'o'){
+	if(preGenGrid[x - 1][y + 1] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x][y + 1] == 'o'){
+	if(preGenGrid[x][y + 1] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x + 1][y + 1] == 'o'){
+	if(preGenGrid[x + 1][y + 1] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x + 1][y] == 'o'){
+	if(preGenGrid[x + 1][y] == 'o'){
 		aliveCells++;
 	}
 	
-	if(grid[x][y] == 'o'){
+	if(preGenGrid[x][y] == 'o'){
 		if(aliveCells < 2){
 			grid[x][y] = '.'; // Dies via underpopulation
 		}
@@ -421,25 +434,25 @@ void checkLeft(std::vector<std::vector<char>>& grid, int& x, int& y){
 }
 
 // This function is working properly; checks the right column w/o corners 
-void checkRight(std::vector<std::vector<char>>& grid, int& x, int& y){
+void checkRight(std::vector<std::vector<char>> preGenGrid, std::vector<std::vector<char>>& grid, int& x, int& y){
 	int aliveCells{};
-	if(grid[x - 1][y] == 'o'){
+	if(preGenGrid[x - 1][y] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x - 1][y - 1] == 'o'){
+	if(preGenGrid[x - 1][y - 1] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x][y - 1] == 'o'){
+	if(preGenGrid[x][y - 1] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x + 1][y - 1] == 'o'){
+	if(preGenGrid[x + 1][y - 1] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x + 1][y] == 0){
+	if(preGenGrid[x + 1][y] == 0){
 		aliveCells++;
 	}
 
-	if(grid[x][y] == 'o'){
+	if(preGenGrid[x][y] == 'o'){
 		if(aliveCells < 2){
 			grid[x][y] = '.'; // Dies via underpopulation
 		}
@@ -458,34 +471,34 @@ void checkRight(std::vector<std::vector<char>>& grid, int& x, int& y){
 }
 
 // Pretty sure this is compelete (Not 100% tested)
-void checkMiddle(std::vector<std::vector<char>>& grid, int& x, int& y){
+void checkMiddle(std::vector<std::vector<char>> preGenGrid, std::vector<std::vector<char>>& grid, int& x, int& y){
 	int aliveCells{};
-	if(grid[x - 1][y - 1] == 'o'){
+	if(preGenGrid[x - 1][y - 1] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x - 1][y] == 'o'){
+	if(preGenGrid[x - 1][y] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x - 1][y + 1] == 'o'){
+	if(preGenGrid[x - 1][y + 1] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x][y - 1] == 'o'){
+	if(preGenGrid[x][y - 1] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x][y + 1] == 'o'){
+	if(preGenGrid[x][y + 1] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x + 1][y - 1] == 'o'){
+	if(preGenGrid[x + 1][y - 1] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x + 1][y] == 'o'){
+	if(preGenGrid[x + 1][y] == 'o'){
 		aliveCells++;
 	}
-	if(grid[x + 1][y + 1] == 'o'){
+	if(preGenGrid[x + 1][y + 1] == 'o'){
 		aliveCells++;
 	}
 
-	if(grid[x][y] == 'o'){
+	if(preGenGrid[x][y] == 'o'){
 		if(aliveCells < 2){
 			grid[x][y] = '.'; // Dies via underpopulation
 		}
