@@ -28,31 +28,39 @@ void checkBottom(std::vector<std::vector<char>> preGenGrid, std::vector<std::vec
 
 
 int main(){
+	bool repeatValue = false;
+		do{
+			switch(startMenu()){
+				case 1:
+					system("clear");
+					gameScreen();
+				break;
 
-	switch(startMenu()){
-		case 1:
-			system("clear");
-			gameScreen();
-		break;
+				case 2:
+					infoPage();
+					repeatValue = true;
+				break;
 
-		case 2:
-			system("clear");
-			infoPage();
-		break;
+				case 3:
+					std::cout << "Thank you for visiting! Goodbye.\n";
+					repeatValue = false;
+				break;
 
-		case 3:
-			std::cout << "Thank you for visiting! Goodbye.\n";
-		break;
-
-		default:
-			std::cout << "Somehow you got this message?\n";
-	}
+				default:
+					std::cout << "Somehow you got this message? Please enter an integer (1-3)\n";
+					std::cout << "Press any key to continue...";
+					clearInputBuffer();
+					std::cin.get();
+					repeatValue = true;
+			}
+	}while(repeatValue);
 
 	return EXIT_SUCCESS;
 }
 
 // This function displays the main menu screen to the user
 int startMenu(){
+	system("clear");
 	std::cout << "Conway's Game of Life In C++\n----------------------------\n";
 	std::cout << "1.) Start Game\n2.) Info\n3.) Exit\n";
 	
@@ -70,6 +78,7 @@ int getUserIntInput(){
 
 // This function displays the info to the user through file I/O
 void infoPage(){
+	system("clear");
 	std::string fileText{};
 	std::fstream infoFile ("infoPage.txt");
 
@@ -79,6 +88,11 @@ void infoPage(){
 		}
 	}
 	// I will worry about if the file doesn't open later on in the program
+	
+	std::cout << "\nPress any key to return to main menu...";
+	clearInputBuffer();
+	std::cin.get();
+	infoFile.close();
 }
 
 int getXValue(){
