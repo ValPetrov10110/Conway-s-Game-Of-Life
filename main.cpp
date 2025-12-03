@@ -448,7 +448,7 @@ void checkRight(std::vector<std::vector<char>> preGenGrid, std::vector<std::vect
 	if(preGenGrid[x + 1][y - 1] == 'o'){
 		aliveCells++;
 	}
-	if(preGenGrid[x + 1][y] == 0){
+	if(preGenGrid[x + 1][y] == 'o'){
 		aliveCells++;
 	}
 
