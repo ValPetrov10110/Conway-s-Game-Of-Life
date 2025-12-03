@@ -148,9 +148,16 @@ void printGrid(std::vector<std::vector<char>> grid, int& x, int& y){
 void getUserCell(std::vector<std::vector<char>>& grid, int& x, int& y){
 	char replayValue{};
 	do{
-		std::cout << "Enter Cell's location[i.e., 8 12]: ";
+		std::cout << "\nEnter Cell's location[i.e., 8 12]: ";
 		int xAxis{}, yAxis{};
 		std::cin >> xAxis >> yAxis;
+		if(xAxis > x || yAxis > y || xAxis <= 0 || yAxis <= 0){
+			std::cout << "OUT-OF-BOUNDS ERROR: AUTOMATICALLY REDIRECTING\n";
+			std::this_thread::sleep_for(std::chrono::seconds(2));
+			system("clear");
+			printGrid(grid, x, y);
+			getUserCell(grid, x, y);
+		}
 		grid[yAxis - 1][xAxis - 1] = 'o';
 		printGrid(grid, x, y);
 		std::cout << "\nWould you like to input another location (Y/n): ";
