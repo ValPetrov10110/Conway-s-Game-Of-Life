@@ -1,9 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <thread>
-#include <chrono>
 #include "Simulation.h"
+#include "Input.h"
 
 // These are my function declarations
 int startMenu();
@@ -54,15 +53,6 @@ int startMenu(){
 	return getUserIntInput();
 }
 
-// This function accepts users input for INTS
-int getUserIntInput(){
-	std::cout << "> ";
-	int userResponse{};
-	std::cin >> userResponse;
-
-	return userResponse;
-}
-
 // This function displays the info to the user through file I/O
 void infoPage(){
 	system("clear");
@@ -82,32 +72,6 @@ void infoPage(){
 	infoFile.close();
 }
 
-int getXValue(){
-	const int MAX_X = 50;
-	const int MIN_X = 5;
-	int xValue{};
-
-	do{
-		std::cout << "Enter how many rows [Maximum 50, Minimum 5]: ";
-		std::cin >> xValue;
-	}while(xValue < MIN_X || xValue > MAX_X);
-
-	return xValue;
-}
-
-int getYValue(){
-	const int MAX_Y = 50;
-	const int MIN_Y = 5;
-	int yValue{};
-
-	do{
-		std::cout << "Enter how many columns [Maximum 50, Minimum 5]: ";
-		std::cin >> yValue;
-	}while(yValue < MIN_Y || yValue > MAX_Y);
-
-	return yValue;
-}
-
 void gameScreen(){
 	int xValue = getXValue();
 	int yValue = getYValue();
@@ -120,23 +84,3 @@ void gameScreen(){
 	startSimulation(grid, xValue, yValue);
 }
 
-void getUserCell(std::vector<std::vector<char>>& grid, int& x, int& y){
-	char replayValue{};
-	do{
-		std::cout << "\nEnter Cell's location[i.e., 8 12]: ";
-		int xAxis{}, yAxis{};
-		std::cin >> xAxis >> yAxis;
-		if(xAxis > x || yAxis > y || xAxis <= 0 || yAxis <= 0){
-			std::cout << "OUT-OF-BOUNDS ERROR: AUTOMATICALLY REDIRECTING\n";
-			std::this_thread::sleep_for(std::chrono::seconds(2));
-			system("clear");
-			printGrid(grid, x, y);
-			getUserCell(grid, x, y);
-		}
-		grid[yAxis - 1][xAxis - 1] = 'o';
-		printGrid(grid, x, y);
-		std::cout << "\nWould you like to input another location (Y/n): ";
-		std::cin >> replayValue;
-
-	}while(toupper(replayValue) != 'N');
-}
