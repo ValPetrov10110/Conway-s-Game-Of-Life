@@ -3,7 +3,6 @@
 void checkUpperLeft(char2Dvector preGenGrid, char2Dvector& grid, int& x, int& y){
 	int aliveCells{};
 
- 
 	if(preGenGrid[x][y + 1] == 'o'){
 		aliveCells++;
 	}
