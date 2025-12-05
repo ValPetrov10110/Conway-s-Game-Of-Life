@@ -127,13 +127,17 @@ std::string fileCreation(){
 }
 
 void printToFile(std::string fileName, int x, int y){
+	system("clear");
 	std::ofstream fileOutput ("presets/" + fileName + ".txt");
-	std::string file{};
-
+	std::vector<std::vector<char>> fileGrid(x, std::vector<char>(y, '.'));
+	printGrid(fileGrid, x, y);
+	getUserCell(fileGrid, x, y);
+	
 	for(int row = 0; row < x; row++){
 		for(int col = 0; col < y; col++){
-			fileOutput << '.';
+			fileOutput << fileGrid[row][col] << " ";
 		}
 		fileOutput << '\n';
 	}
 }
+
