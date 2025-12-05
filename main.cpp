@@ -16,7 +16,8 @@ int getYValue();
 void getUserCell(std::vector<std::vector<char>>& grid, int& x, int& y);
 void createPreset();
 void loadPreset();
-void fileCreation();
+std::string fileCreation();
+void printToFile(std::string fileName, int x, int y);
 
 int main(){
 	bool repeatValue = false;
@@ -100,18 +101,39 @@ void gameScreen(){
 }
 
 void createPreset(){
-	fileCreation();
+	system("clear");
+	std::string fileName = fileCreation();
+
+	int x = getXValue();
+	int y = getYValue();
+
+	printToFile(fileName, x, y);
+
 }
 
-void loadPreset(){
+void loadToPreset(){
 
 }
 
-void fileCreation(){
+std::string fileCreation(){
 	std::cout << "Enter name for preset: ";
 	std::string saveName{};
 	std::cin >> saveName;
 
-	std::ofstream newPreset (saveName + ".txt");
+	std::ofstream newPreset ("presets/" + saveName + ".txt");
 	newPreset.close();
+
+	return saveName;
+}
+
+void printToFile(std::string fileName, int x, int y){
+	std::ofstream fileOutput ("presets/" + fileName + ".txt");
+	std::string file{};
+
+	for(int row = 0; row < x; row++){
+		for(int col = 0; col < y; col++){
+			fileOutput << '.';
+		}
+		fileOutput << '\n';
+	}
 }
