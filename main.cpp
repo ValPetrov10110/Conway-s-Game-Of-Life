@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <thread>
+#include <chrono>
 #include "Simulation.h"
 #include "Input.h"
 
@@ -64,7 +66,10 @@ void infoPage(){
 			std::cout << fileText << '\n';
 		}
 	}
-	// I will worry about if the file doesn't open later on in the program
+	else{
+		std::cout << "ERROR: infoPage.txt missing.\nFATAL ERROR: automatically restarting...";
+		std::this_thread::sleep_for(std::chrono::seconds(5));
+	}
 	
 	std::cout << "\nPress any key to return to main menu...";
 	clearInputBuffer();

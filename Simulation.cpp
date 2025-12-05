@@ -24,7 +24,6 @@ void printGrid(char2Dvector& grid, int& x, int& y){
 void startSimulation(char2Dvector& grid, int& x, int& y){
 	system("clear");
 	printGrid(grid, x, y);
-	int generation{};
 	std::cout << "WARNING: In order to exit the simulation you must hold Ctrl + C\n";
 	std::cout << "\nPress any key to start simulation...";
 	clearInputBuffer();
