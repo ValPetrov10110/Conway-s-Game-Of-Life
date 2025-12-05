@@ -14,6 +14,9 @@ void gameScreen();
 int getXValue();
 int getYValue();
 void getUserCell(std::vector<std::vector<char>>& grid, int& x, int& y);
+void createPreset();
+void loadPreset();
+void fileCreation();
 
 int main(){
 	bool repeatValue = false;
@@ -25,11 +28,18 @@ int main(){
 				break;
 
 				case 2:
+					createPreset();
+				break;
+
+				case 3:
+				break;
+
+				case 4:
 					infoPage();
 					repeatValue = true;
 				break;
 
-				case 3:
+				case 5:
 					std::cout << "Thank you for visiting! Goodbye.\n";
 					repeatValue = false;
 				break;
@@ -50,7 +60,7 @@ int main(){
 int startMenu(){
 	system("clear");
 	std::cout << "Conway's Game of Life In C++\n----------------------------\n";
-	std::cout << "1.) Start Game\n2.) Info\n3.) Exit\n";
+	std::cout << "1.) Start Game\n2.) Create Preset\n3.) Load Preset\n4.) Info\n5.) Exit\n";
 	
 	return getUserIntInput();
 }
@@ -89,3 +99,19 @@ void gameScreen(){
 	startSimulation(grid, xValue, yValue);
 }
 
+void createPreset(){
+	fileCreation();
+}
+
+void loadPreset(){
+
+}
+
+void fileCreation(){
+	std::cout << "Enter name for preset: ";
+	std::string saveName{};
+	std::cin >> saveName;
+
+	std::ofstream newPreset (saveName + ".txt");
+	newPreset.close();
+}
