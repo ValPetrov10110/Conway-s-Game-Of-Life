@@ -1,8 +1,10 @@
+#include <typeinfo>
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include <thread>
 #include <chrono>
+#include <filesystem>
 #include "Simulation.h"
 #include "Input.h"
 
@@ -19,6 +21,7 @@ void loadPreset();
 std::string fileCreation();
 void printToFile(std::string fileName, int x, int y);
 void showPresets();
+std::string cleanUp(std::string directory);
 
 int main(){
 	bool repeatValue = false;
@@ -114,7 +117,8 @@ void createPreset(){
 }
 
 void loadPreset(){
-	
+	system("clear");
+	showPresets();	
 }
 
 std::string fileCreation(){
@@ -145,5 +149,13 @@ void printToFile(std::string fileName, int x, int y){
 
 // Working on this
 void showPresets(){
-	std::cout << "Enter Directory: ";
+	std::cout << "Presets\n-----------\n";
+	std::string path = "Saves/";
+	for(const auto& directory : std::filesystem::directory_iterator(path)){
+		std::string fileName = static_cast<std::string>(directory.path().filename());
+	}
+}
+
+// I need to figure out how to remove the "" and the .txt extension
+std::string cleanUp(std::string directory){
 }
