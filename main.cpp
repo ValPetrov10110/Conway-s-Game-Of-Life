@@ -18,6 +18,7 @@ void createPreset();
 void loadPreset();
 std::string fileCreation();
 void printToFile(std::string fileName, int x, int y);
+void showPresets();
 
 int main(){
 	bool repeatValue = false;
@@ -33,6 +34,7 @@ int main(){
 				break;
 
 				case 3:
+					loadPreset();
 				break;
 
 				case 4:
@@ -111,8 +113,8 @@ void createPreset(){
 
 }
 
-void loadToPreset(){
-
+void loadPreset(){
+	
 }
 
 std::string fileCreation(){
@@ -120,7 +122,7 @@ std::string fileCreation(){
 	std::string saveName{};
 	std::cin >> saveName;
 
-	std::ofstream newPreset ("presets/" + saveName + ".txt");
+	std::ofstream newPreset ("Saves/" + saveName + ".txt");
 	newPreset.close();
 
 	return saveName;
@@ -128,7 +130,7 @@ std::string fileCreation(){
 
 void printToFile(std::string fileName, int x, int y){
 	system("clear");
-	std::ofstream fileOutput ("presets/" + fileName + ".txt");
+	std::ofstream fileOutput ("Saves/" + fileName + ".txt");
 	std::vector<std::vector<char>> fileGrid(x, std::vector<char>(y, '.'));
 	printGrid(fileGrid, x, y);
 	getUserCell(fileGrid, x, y);
@@ -141,3 +143,7 @@ void printToFile(std::string fileName, int x, int y){
 	}
 }
 
+// Working on this
+void showPresets(){
+	std::cout << "Enter Directory: ";
+}
