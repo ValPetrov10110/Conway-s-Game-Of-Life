@@ -173,27 +173,22 @@ void searchPresets(std::string fileName){
 				std::ifstream myFile(directory.path().string());
 				std::string fileText{};
 				int x{}, y{};
-
+				char2Dvector grid;
+			
 				while(std::getline(myFile, fileText)){
 					x++;
-					std::cout << fileText << '\n';
 					y = fileText.length();
+					std::vector<char> row(fileText.begin(), fileText.end());
+					grid.push_back(row);
 				}
-
-				char2Dvector grid(x, std::vector<char>(y));
-				while(std::getline(myFile, fileText)){
-					for(int row = 0; row < x; row++){
-						for(int col = 0; col < y; col++){
-							grid[row][col] = fileText[col];
-							std::cout << fileText[col];
-						}
-					}
-				}
+				
+				startSimulation(grid, x, y);
+				
 				myFile.close();
 			}
+		}
 
 
 		}
 	}
-}
 
