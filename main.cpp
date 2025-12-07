@@ -1,4 +1,3 @@
-#include <typeinfo>
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -147,15 +146,15 @@ void printToFile(std::string fileName, int x, int y){
 	}
 }
 
-// Working on this
 void showPresets(){
 	std::cout << "Presets\n-----------\n";
 	std::string path = "Saves/";
 	for(const auto& directory : std::filesystem::directory_iterator(path)){
-		std::string fileName = static_cast<std::string>(directory.path().filename());
+		std::string fileName = static_cast<std::string>(directory.path().stem());
+		
+		if(fileName != ".gitkeep"){
+			std::cout << fileName << '\n';
+		}
 	}
 }
 
-// I need to figure out how to remove the "" and the .txt extension
-std::string cleanUp(std::string directory){
-}
