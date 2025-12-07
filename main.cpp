@@ -20,7 +20,7 @@ void loadPreset();
 std::string fileCreation();
 void printToFile(std::string fileName, int x, int y);
 void showPresets();
-std::string cleanUp(std::string directory);
+void searchPresets(std::string fileName);
 
 int main(){
 	bool repeatValue = false;
@@ -117,7 +117,12 @@ void createPreset(){
 
 void loadPreset(){
 	system("clear");
-	showPresets();	
+	showPresets();
+	std::cout << "\n\nEnter filename > ";
+	std::string user_input{};
+	std::cin >> user_input;
+	
+	searchPresets(user_input);
 }
 
 std::string fileCreation(){
@@ -140,7 +145,7 @@ void printToFile(std::string fileName, int x, int y){
 	
 	for(int row = 0; row < x; row++){
 		for(int col = 0; col < y; col++){
-			fileOutput << fileGrid[row][col] << " ";
+			fileOutput << fileGrid[row][col];
 		}
 		fileOutput << '\n';
 	}
@@ -154,6 +159,40 @@ void showPresets(){
 		
 		if(fileName != ".gitkeep"){
 			std::cout << fileName << '\n';
+		}
+	}
+}
+
+void searchPresets(std::string fileName){
+	std::string path = "Saves/";
+	for(const auto& directory : std::filesystem::directory_iterator(path)){
+		std::string directoryFileName = directory.path().stem().string();
+
+		if(directoryFileName != ".gitkeep"){
+			if(directoryFileName == fileName){
+				std::ifstream myFile(directory.path().string());
+				std::string fileText{};
+				int x{}, y{};
+
+				while(std::getline(myFile, fileText)){
+					x++;
+					std::cout << fileText << '\n';
+					y = fileText.length();
+				}
+
+				char2Dvector grid(x, std::vector<char>(y));
+				while(std::getline(myFile, fileText)){
+					for(int row = 0; row < x; row++){
+						for(int col = 0; col < y; col++){
+							grid[row][col] = fileText[col];
+							std::cout << fileText[col];
+						}
+					}
+				}
+				myFile.close();
+			}
+
+
 		}
 	}
 }
