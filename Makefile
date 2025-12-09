@@ -4,7 +4,7 @@ CXXFLAGS = -std=c++17 -Wall -Wextra -Wpedantic
 
 TARGET = main
 
-SRC = main.cpp Simulation.cpp Checker.cpp Input.cpp
+SRC = main.cpp Simulation.cpp Checker.cpp Input.cpp LoadSave.cpp
 
 all: $(TARGET)
 
