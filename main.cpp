@@ -5,6 +5,7 @@
 #include <chrono>
 #include "Simulation.h"
 #include "Input.h"
+#include "LoadSave.h"
 
 // These are my function declarations
 int startMenu();
@@ -14,12 +15,6 @@ void gameScreen();
 int getXValue();
 int getYValue();
 void getUserCell(std::vector<std::vector<char>>& grid, int& x, int& y);
-void createPreset();
-void loadPreset();
-std::string fileCreation();
-void printToFile(std::string fileName, int x, int y);
-void showPresets();
-void searchPresets(std::string fileName);
 
 int main(){
 	bool repeatValue = false;
