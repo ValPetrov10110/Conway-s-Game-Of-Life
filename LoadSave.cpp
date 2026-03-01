@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <filesystem>
+#include <string>
 
 void createPreset(){
 	system("clear");
