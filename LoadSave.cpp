@@ -30,7 +30,7 @@ void showPresets(){
 	std::cout << "Presets\n-----------\n";
 	std::string path = "Saves/";
 	for(const auto& directory : std::filesystem::directory_iterator(path)){
-		std::string fileName = static_cast<std::string>(directory.path().stem());
+		std::string fileName = directory.path().stem().string();
 		
 		if(fileName != ".gitkeep"){
 			std::cout << fileName << '\n';
