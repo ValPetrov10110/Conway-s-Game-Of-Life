@@ -27,7 +27,7 @@ int getXValue(){
 	return xValue;
 }
 
-int getYValue(){
+std::size_t getYValue(){
 	int yValue{};
 
 	do{
