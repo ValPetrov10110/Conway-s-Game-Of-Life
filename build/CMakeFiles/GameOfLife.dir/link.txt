@@ -1,1 +1,0 @@
-/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/GameOfLife.dir/link.d CMakeFiles/GameOfLife.dir/main.cpp.o CMakeFiles/GameOfLife.dir/Simulation.cpp.o CMakeFiles/GameOfLife.dir/Checker.cpp.o CMakeFiles/GameOfLife.dir/Input.cpp.o CMakeFiles/GameOfLife.dir/LoadSave.cpp.o -o GameOfLife

@@ -1,3 +1,0 @@
-/home/Valentin/Coding/GameOfLife/build/CMakeFiles/GameOfLife.dir
-/home/Valentin/Coding/GameOfLife/build/CMakeFiles/edit_cache.dir
-/home/Valentin/Coding/GameOfLife/build/CMakeFiles/rebuild_cache.dir
