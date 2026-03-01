@@ -3,6 +3,7 @@
 #include <vector>
 #include <thread>
 #include <chrono>
+#include <string>
 #include "Simulation.h"
 #include "Input.h"
 #include "LoadSave.h"
