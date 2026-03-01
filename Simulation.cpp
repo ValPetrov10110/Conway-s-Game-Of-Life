@@ -76,7 +76,7 @@ void startSimulation(char2Dvector& grid, int& x, int& y){
 
 		printGrid(grid, x, y);
 
-		std::this_thread::sleep_for(std::chrono::milliseconds(150)); // Adjust this to set the speed of the simulation
+		std::this_thread::sleep_for(std::chrono::milliseconds(150)); // Adjust this to set the speed of the simulation (150 is the sweet spot)
 	}
 }
 
