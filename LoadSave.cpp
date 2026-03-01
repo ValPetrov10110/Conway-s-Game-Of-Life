@@ -72,7 +72,8 @@ void searchPresets(std::string fileName){
 			if(directoryFileName == fileName){
 				std::ifstream myFile(directory.path().string());
 				std::string fileText{};
-				int x{}, y{};
+				int x{};
+				std::size_t y{};
 				char2Dvector grid;
 			
 				while(std::getline(myFile, fileText)){

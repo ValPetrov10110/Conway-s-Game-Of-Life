@@ -9,7 +9,7 @@ void clearInputBuffer(){
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
-void printGrid(char2Dvector& grid, int& x, int& y){
+void printGrid(char2Dvector& grid, int& x, std::size_t& y){
 	system("clear");
 	std::cout << '\n';
 	for(int row = 0; row < x; row++){
@@ -21,7 +21,7 @@ void printGrid(char2Dvector& grid, int& x, int& y){
 	}	
 }
 
-void startSimulation(char2Dvector& grid, int& x, int& y){
+void startSimulation(char2Dvector& grid, int& x, std::size_t& y){
 	system("clear");
 	printGrid(grid, x, y);
 	std::cout << "WARNING: In order to exit the simulation you must hold Ctrl + C\n";
