@@ -89,7 +89,7 @@ void infoPage(){
 
 void gameScreen(){
 	int xValue = getXValue();
-	int yValue = getYValue();
+	std::size_t yValue = getYValue();
 	std::vector<std::vector<char>> grid(xValue, std::vector<char>(yValue, '.'));
 	
 	printGrid(grid, xValue, yValue);

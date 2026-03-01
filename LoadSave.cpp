@@ -38,7 +38,7 @@ void showPresets(){
 	}
 }
 
-void printToFile(std::string fileName, int x, int y){
+void printToFile(std::string fileName, int x, std::size_t y){
 	system("clear");
 	std::ofstream fileOutput ("Saves/" + fileName + ".txt");
 	std::vector<std::vector<char>> fileGrid(x, std::vector<char>(y, '.'));
