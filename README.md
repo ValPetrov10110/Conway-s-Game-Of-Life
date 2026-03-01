@@ -26,19 +26,18 @@ Clone the repository:
 git clone https://github.com/ValPetrov10110/Conway-s-Game-Of-Life.git
 cd Conway-s-Game-Of-Life
 ```
-
-Create a build directory and compile
+Configure and Build
 ```
-mkdir build
-cd build
-cmake ..
-make
+cmake -B build
+cmake --build build
 ```
 
 Make sure to run the program from the project root
-```
-cd ..
+```Linux/macOS
 ./build/GameOfLife
+```
+```Windows
+.\build\GameOfLife.exe
 ```
 
 ## Project Structure
