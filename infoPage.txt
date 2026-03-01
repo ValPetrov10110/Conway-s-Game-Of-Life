@@ -1,21 +1,6 @@
 Welcome to Conway's Game of Life!
 ---------------------------------
 
--------------------
-| Project Details |
--------------------
-
-The point of this project is to practice my C++ skills on something
-more tangible and visual than most of what I have been creating prior. It
-stating with me asking ChatGPT if a project like this was possible for 
-someone who is a beginner - intermediate in C++, and to my surprise it 
-said it was completely possible! Since then I got the confidence to create
-this game. Everything you see in here is built from scratch all in an 
-effort to learn, grow, and develop as a Software Engineer.
-
-Signed, Valentin Petrov
-
-
 ---------
 | Rules |
 ---------

@@ -2,7 +2,7 @@ CXX = g++
 
 CXXFLAGS = -std=c++17 -Wall -Wextra -Wpedantic
 
-TARGET = main
+TARGET = GameOfLife
 
 SRC = main.cpp Simulation.cpp Checker.cpp Input.cpp LoadSave.cpp
 
