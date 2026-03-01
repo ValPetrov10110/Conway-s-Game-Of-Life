@@ -38,7 +38,7 @@ int getYValue(){
 	return yValue;
 }
 
-void getUserCell(char2Dvector& grid, int& x, int& y){
+void getUserCell(char2Dvector& grid, int& x, std::size_t& y){
 	
 	char replayValue{};
 	do{
