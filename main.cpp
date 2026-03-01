@@ -14,7 +14,7 @@ int getUserIntInput();
 void infoPage();
 void gameScreen();
 int getXValue();
-int getYValue();
+std::size_t getYValue();
 void getUserCell(std::vector<std::vector<char>>& grid, int& x, int& y);
 
 int main(){
