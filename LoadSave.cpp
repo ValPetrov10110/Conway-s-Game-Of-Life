@@ -11,7 +11,7 @@ void createPreset(){
 	std::string fileName = fileCreation();
 
 	int x = getXValue();
-	int y = getYValue();
+	std::size_t y = getYValue();
 
 	printToFile(fileName, x, y);
 }
