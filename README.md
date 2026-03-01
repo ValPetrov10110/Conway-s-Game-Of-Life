@@ -21,7 +21,7 @@ Conway's Game of Life is a zero-player cellular automaton simulation where each 
 - C++17-compatible compiler
 
 ## Build Instructions
-Clone the repository:
+Clone the repository
 ```
 git clone https://github.com/ValPetrov10110/Conway-s-Game-Of-Life.git
 cd Conway-s-Game-Of-Life
@@ -33,6 +33,7 @@ cmake --build build
 ```
 
 Make sure to run the program from the project root
+
 Linux/macOS
 ```
 ./build/GameOfLife
