@@ -33,10 +33,12 @@ cmake --build build
 ```
 
 Make sure to run the program from the project root
-```Linux/macOS
+Linux/macOS
+```
 ./build/GameOfLife
 ```
-```Windows
+Windows
+```
 .\build\GameOfLife.exe
 ```
 
