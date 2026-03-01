@@ -14,4 +14,8 @@ add_executable(
 	LoadSave.cpp
 )
 
-target_compile_options(GameOfLife PRIVATE -Wall -Wextra -Wpedantic)
+if(MSVC)
+	target_compile_options(GameOfLife PRIVATE /W4 /permissive-)
+else()
+	target_compile_options(GameOfLife PRIVATE -Wall -Wextra -Wpedantic)
+endif()
