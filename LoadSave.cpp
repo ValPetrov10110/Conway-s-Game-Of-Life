@@ -1,13 +1,15 @@
 #include "LoadSave.h"
 #include "Input.h"
 #include "Simulation.h"
+#include "Terminal.h"
+
 #include <iostream>
 #include <fstream>
 #include <filesystem>
 #include <string>
 
 void createPreset(){
-	system("clear");
+	clearScreen();
 	std::string fileName = fileCreation();
 
 	int x = getXValue();
@@ -39,7 +41,7 @@ void showPresets(){
 }
 
 void printToFile(std::string fileName, int x, std::size_t y){
-	system("clear");
+	clearScreen();
 	std::ofstream fileOutput ("Saves/" + fileName + ".txt");
 	std::vector<std::vector<char>> fileGrid(x, std::vector<char>(y, '.'));
 	printGrid(fileGrid, x, y);
@@ -54,7 +56,7 @@ void printToFile(std::string fileName, int x, std::size_t y){
 }
 
 void loadPreset(){
-	system("clear");
+	clearScreen();
 	showPresets();
 	std::cout << "\n\nEnter filename > ";
 	std::string user_input{};

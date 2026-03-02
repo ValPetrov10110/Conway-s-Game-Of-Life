@@ -4,9 +4,11 @@
 #include <thread>
 #include <chrono>
 #include <string>
+
 #include "Simulation.h"
 #include "Input.h"
 #include "LoadSave.h"
+#include "Terminal.h"
 
 // These are my function declarations
 int startMenu();
@@ -22,7 +24,7 @@ int main(){
 		do{
 			switch(startMenu()){
 				case 1:
-					system("clear");
+					clearScreen();
 					gameScreen();
 				break;
 
@@ -58,7 +60,7 @@ int main(){
 
 // This function displays the main menu screen to the user
 int startMenu(){
-	system("clear");
+	clearScreen();
 	std::cout << "Conway's Game of Life In C++\n----------------------------\n";
 	std::cout << "1.) Start Game\n2.) Create Preset\n3.) Load Preset\n4.) Info\n5.) Exit\n";
 	
@@ -67,7 +69,7 @@ int startMenu(){
 
 // This function displays the info to the user through file I/O
 void infoPage(){
-	system("clear");
+	clearScreen();
 	std::string fileText{};
 	std::fstream infoFile ("infoPage.txt");
 

@@ -4,6 +4,7 @@
 
 #include "Input.h"
 #include "Simulation.h"
+#include "Terminal.h"
 
 constexpr int MAX = 50;
 constexpr int MIN = 5;
@@ -48,7 +49,7 @@ void getUserCell(char2Dvector& grid, int& x, std::size_t& y){
 		if(xAxis > x || yAxis > y || xAxis <= 0 || yAxis <= 0){
 			std::cout << "OUT-OF-BOUNDS ERROR: AUTOMATICALLY REDIRECTING\n";
 			std::this_thread::sleep_for(std::chrono::seconds(2));
-			system("clear");
+			clearScreen();
 			printGrid(grid, x, y);
 			getUserCell(grid, x, y);
 		}

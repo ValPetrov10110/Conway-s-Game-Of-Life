@@ -2,15 +2,17 @@
 #include <limits>
 #include <thread>
 #include <chrono>
+
 #include "Checker.h"
 #include "Simulation.h"
+#include "Terminal.h"
 
 void clearInputBuffer(){
 	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
 void printGrid(char2Dvector& grid, int& x, std::size_t& y){
-	system("clear");
+	clearScreen();
 	std::cout << '\n';
 	for(int row = 0; row < x; row++){
 		std::cout << '\t';
@@ -22,7 +24,7 @@ void printGrid(char2Dvector& grid, int& x, std::size_t& y){
 }
 
 void startSimulation(char2Dvector& grid, int& x, std::size_t& y){
-	system("clear");
+	clearScreen();
 	printGrid(grid, x, y);
 	std::cout << "WARNING: In order to exit the simulation you must hold Ctrl + C\n";
 	std::cout << "\nPress any key to start simulation...";
