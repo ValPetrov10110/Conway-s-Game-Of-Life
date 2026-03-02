@@ -29,18 +29,19 @@ cd Conway-s-Game-Of-Life
 Configure and Build
 ```
 cmake -B build
-cmake --build build
 ```
 
 Make sure to run the program from the project root
 
 Linux/macOS
 ```
+cmake --build build
 ./build/GameOfLife
 ```
 Windows
 ```
-.\build\GameOfLife.exe
+cmake --build build --config Release
+.\build\Release\GameOfLife.exe
 ```
 
 ## Project Structure
