@@ -19,6 +19,7 @@ Conway's Game of Life is a zero-player cellular automaton simulation where each 
 ## Requirements
 - CMake >= 3.15
 - C++17-compatible compiler
+- Git
 
 ## Build Instructions
 Clone the repository
