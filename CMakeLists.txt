@@ -12,6 +12,7 @@ add_executable(
 	Checker.cpp
 	Input.cpp
 	LoadSave.cpp
+	Terminal.cpp
 )
 
 if(MSVC)
