@@ -60,6 +60,8 @@ Conways-s-Game-Of-Life/
   Input.h
   LoadSave.cpp
   LoadSave.h
+  Terminal.cpp
+  Terminal.h
   Saves/
   README.md
 ```
@@ -69,6 +71,7 @@ Components roles
 - Checker: Neighbor counting and rule evaluation
 - Input: User interaction handling
 - LoadSave: loading/saving logic
+- Terminal: Handles terminal screen clearing
 - Saves/: predefined pattern files
 
 ## Known Issues
