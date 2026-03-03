@@ -75,7 +75,6 @@ Components roles
 - Saves/: predefined pattern files
 
 ## Known Issues
-- Non-numeric input for coordinates may cause undefined behavior
 - Program expects to be run from the repository root so `Saves/` works correctly
 
 ## License
