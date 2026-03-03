@@ -16,7 +16,7 @@ void printGrid(char2Dvector& grid, int& x, std::size_t& y){
 	std::cout << '\n';
 	for(int row = 0; row < x; row++){
 		std::cout << '\t';
-		for(int col = 0; col < y; col++){
+		for(std::size_t col = 0; col < y; col++){
 			std::cout << grid[row][col] << " ";
 		}
 		std::cout << '\n';
@@ -39,7 +39,7 @@ void startSimulation(char2Dvector& grid, int& x, std::size_t& y){
 
 		// First 2 for loops are to iterate through the entire grid
 		for(int row = 0; row < x; row++){
-			for(int col = 0; col < y; col++){
+			for(std::size_t col = 0; col < y; col++){
 				if(row == 0){ // Takes care of top row edge case
 					if(col == 0){ // Takes care of left top row edge case
 						checkUpperLeft(preGenGrid, grid, row, col);	

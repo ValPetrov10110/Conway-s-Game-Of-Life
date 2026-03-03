@@ -48,7 +48,7 @@ void printToFile(std::string fileName, int x, std::size_t y){
 	getUserCell(fileGrid, x, y);
 	
 	for(int row = 0; row < x; row++){
-		for(int col = 0; col < y; col++){
+		for(std::size_t col = 0; col < y; col++){
 			fileOutput << fileGrid[row][col];
 		}
 		fileOutput << '\n';
