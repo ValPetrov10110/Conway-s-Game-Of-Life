@@ -44,11 +44,19 @@ void getUserCell(char2Dvector& grid, int& x, std::size_t& y){
 	char replayValue{};
 	do{
 		std::cout << "\nEnter Cell's location[i.e., 8 12]: ";
-		int xAxis{}, yAxis{};
+		int xAxis{}; 
+		std::size_t yAxis{};
 		std::cin >> xAxis >> yAxis;
-		if(xAxis > x || yAxis > y || xAxis <= 0 || yAxis <= 0){
+		if(std::cin.fail()){
+			std::cout << "INVALID INPUT: AUTOMATICALLY REDIRECTING\n";
+			std::this_thread::sleep_for(std::chrono::seconds(3));
+			clearScreen();
+			printGrid(grid, x, y);
+			getUserCell(grid, x, y);
+		}
+		else if(xAxis > x || yAxis > y || xAxis <= 0 || yAxis <= 0){
 			std::cout << "OUT-OF-BOUNDS ERROR: AUTOMATICALLY REDIRECTING\n";
-			std::this_thread::sleep_for(std::chrono::seconds(2));
+			std::this_thread::sleep_for(std::chrono::seconds(3));
 			clearScreen();
 			printGrid(grid, x, y);
 			getUserCell(grid, x, y);
