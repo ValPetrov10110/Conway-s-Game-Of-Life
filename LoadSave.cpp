@@ -58,11 +58,13 @@ void printToFile(std::string fileName, int x, std::size_t y){
 void loadPreset(){
 	clearScreen();
 	showPresets();
-	std::cout << "\n\nEnter filename > ";
+	std::cout << "\n\nEnter filename ('Q' to quit) > ";
 	std::string user_input{};
 	std::cin >> user_input;
 	
-	searchPresets(user_input);
+	if(user_input.length() != 1 && (toupper(user_input[0]) != 'Q')){
+		searchPresets(user_input);
+	}
 }
 
 void searchPresets(std::string fileName){
