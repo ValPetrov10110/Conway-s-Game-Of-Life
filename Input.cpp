@@ -53,14 +53,15 @@ void getUserCell(char2Dvector& grid, int& x, std::size_t& y){
 			cinFix();	
 			clearScreen();
 			printGrid(grid, x, y);
-			getUserCell(grid, x, y);
+			continue;
 		}
-		else if(xAxis > x || yAxis > y || xAxis <= 0 || yAxis <= 0){
+		
+		if(xAxis > x || yAxis > y || xAxis <= 0 || yAxis <= 0){
 			std::cout << "OUT-OF-BOUNDS ERROR: AUTOMATICALLY REDIRECTING\n";
 			std::this_thread::sleep_for(std::chrono::seconds(3));
 			clearScreen();
 			printGrid(grid, x, y);
-			getUserCell(grid, x, y);
+			continue;
 		}
 		grid[yAxis - 1][xAxis - 1] = 'o';
 		printGrid(grid, x, y);
