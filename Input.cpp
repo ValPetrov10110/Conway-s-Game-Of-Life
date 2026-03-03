@@ -50,6 +50,7 @@ void getUserCell(char2Dvector& grid, int& x, std::size_t& y){
 		if(std::cin.fail()){
 			std::cout << "INVALID INPUT: AUTOMATICALLY REDIRECTING\n";
 			std::this_thread::sleep_for(std::chrono::seconds(3));
+			cinFix();	
 			clearScreen();
 			printGrid(grid, x, y);
 			getUserCell(grid, x, y);
