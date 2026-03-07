@@ -77,6 +77,7 @@ Components roles
 ## Known Issues
 - Program expects to be run from the repository root so `Saves/` works correctly
 - Program quits from the loading presets screen. Planning to incorporate it sending back to the main menu vs. program termination
+- User entering someone else other than a char when prompted if they want to add another cell causes underfined behavior
 
 ## License
 Open source project under the MIT License
